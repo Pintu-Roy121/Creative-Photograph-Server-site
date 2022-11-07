@@ -10,8 +10,15 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+const services = require('./services.json')
+
 app.get('/', (req, res) => {
-    res.send('server is working for crative Photograph!')
+    res.send('Server is working!')
+})
+
+
+app.get('/services', (req, res) => {
+    res.send(services)
 })
 
 app.listen(port, () => {

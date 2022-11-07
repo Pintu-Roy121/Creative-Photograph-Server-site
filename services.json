@@ -1,0 +1,58 @@
+[
+    {
+        "id": "01",
+        "title": "wedding Photography",
+        "image_url": "https://ibb.co/3BVcXKH",
+        "rating": 5,
+        "price": 1500,
+        "description": "Wedding photography is a specialty in photography that is primarily focused on the photography of events and activities relating to weddings. It may include other types of portrait photography of the couple before the official wedding day, such as a pre-wedding engagement session"
+    },
+    {
+        "id": "02",
+        "title": "Birthday party Photography",
+        "image_url": "https://ibb.co/Hz2nDz4",
+        "rating": 5,
+        "price": 1500,
+        "description": "Birthday party Photography means getting details, people pictures, and wide shots of crowds. For birthday party photography, this can be photos of the birthday cake, a bit of the pile of presents, or decorative touches throughout the space.Essentially, the purpose of photography is to communicate and document moments in time. When you take a photograph and share it with others, you're showing a moment that was frozen through a picture. "
+    },
+    {
+        "id": "03",
+        "title": "Product Photography",
+        "image_url": "https://ibb.co/M2B8CZK",
+        "rating": 5,
+        "price": 1500,
+        "description": "Product photography is a type of commercial photography that involves taking pictures of products for commercial use. The product may be an item or a food or prepared dish. Generally, though, a product in product photography is small enough to sit atop a table.Product photography is intended to portray an object in an attractive or interesting manner. Most commonly, the image may be used to sell the product. The resulting image may be used in a catalog, brochure or in a website."
+    },
+    {
+        "id": "04",
+        "title": "Travel Photography",
+        "image_url": "https://ibb.co/NrPWcW0",
+        "rating": 5,
+        "price": 1500,
+        "description": "Travel photography is a form of photography that for example involves photography of landscapes, historical buildings, cultures, and people in a specific place and destination to document a certain place and make others make to wish they were there.Travel photography is all about bringing the world to people and exposing to them what else is out there. It's about educating people about the customs of other cultures, showing them how they differ from their own. The world is made better by travel photography."
+    },
+    {
+        "id": "05",
+        "title": "Advertising Photography",
+        "image_url": "https://ibb.co/tDcymXb",
+        "rating": 5,
+        "price": 1500,
+        "description": "Advertising photography is a type of photography that focuses on taking pictures for high-impact advertisements, like what you would see in a magazine. These images are usually high-quality, methodically controlled and feature elements meant to engage with an audience.Photographs play an important role in advertising and marketing because they can tell a story. Nowadays, consumers are very visual - therefore, only the images that stand out can really capture their attention."
+    },
+    {
+        "id": "06",
+        "title": "Family Photography",
+        "image_url": "https://ibb.co/WK2ySKx",
+        "rating": 5,
+        "price": 1500,
+        "description": "Family photography is a type of photography that captures people and individuals in a family, which can include parents, their children, grandchildren, aunts, uncles, and cousins.Your family portraits bring your family together. It reminds your family of its love for one another. Your family portraits bring joy. And, in hard times, your family portraits can bring comfort and can heal."
+    },
+    {
+        "id": "07",
+        "title": "Sports Event Photography",
+        "image_url": "https://ibb.co/nknSSBR",
+        "rating": 5,
+        "price": 1500,
+        "description": "Sports photography is a type of photography that covers every sport and sporting event, capturing the action of a game and behind the scenes of the players. This type of photography helps to promote brands, the players, as well as the sport.Your image is in sharp focus, not blurry. Face: You can see the athlete's facial expression, especially their eyes. Action: An act of athleticism or an emotional event is taking place. Equipment: The athlete is holding a piece of equipment, especially the ball."
+    }
+]
