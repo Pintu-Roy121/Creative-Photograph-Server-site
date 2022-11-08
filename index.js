@@ -51,7 +51,7 @@ const run = async () => {
             res.send(result)
         })
 
-        // get specific service using filtering with id.........................
+        // get specific service using id.........................
         app.get('/service/:id', async (req, res) => {
             const id = req.params.id;
 
@@ -59,6 +59,32 @@ const run = async () => {
             const service = await servicesCollections.findOne(query);
 
             res.send(service);
+        })
+
+        // get and post all reviews .............................
+        app.get('/reviews', async (req, res) => {
+            const query = {};
+            const cursor = reviewsCollections.find(query);
+            const result = await cursor.toArray();
+            console.log(result);
+            res.send(result)
+        })
+
+        app.post('/reviews', async (req, res) => {
+            const review = req.body;
+
+            const result = await reviewsCollections.insertOne(review);
+            res.send(result)
+        })
+
+        app.get('/reviews/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = {
+                service_id: id
+            }
+            const reviews = reviewsCollections.find(query);
+            const result = await reviews.toArray();
+            res.send(result)
         })
 
 
