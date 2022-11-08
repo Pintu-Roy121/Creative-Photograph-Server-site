@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
+const { query } = require('express');
 require('dotenv').config();
 
 
@@ -62,17 +63,15 @@ const run = async () => {
         })
 
         // get and post all reviews .............................
-        app.get('/reviews', async (req, res) => {
-            const query = {};
-            const cursor = reviewsCollections.find(query);
-            const result = await cursor.toArray();
-            console.log(result);
-            res.send(result)
-        })
+        // app.get('/reviews', async (req, res) => {
+        //     const query = {};
+        //     const cursor = reviewsCollections.find(query);
+        //     const result = await cursor.toArray();
+        //     res.send(result)
+        // })
 
         app.post('/reviews', async (req, res) => {
             const review = req.body;
-
             const result = await reviewsCollections.insertOne(review);
             res.send(result)
         })
@@ -87,10 +86,16 @@ const run = async () => {
             res.send(result)
         })
 
-
-
-
-
+        // get specific reviews of every user......................
+        app.get('/reviews', async (req, res) => {
+            const email = req.query.email;
+            const query = {
+                email: email
+            }
+            const cursor = reviewsCollections.find(query);
+            const result = await cursor.toArray();
+            res.send(result);
+        })
 
 
     }
