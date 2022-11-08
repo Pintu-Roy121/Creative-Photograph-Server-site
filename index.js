@@ -13,12 +13,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const services = require('./services.json')
-
 
 // MongoDb database connnection..............
-
-
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.geiv5ao.mongodb.net/?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
@@ -34,17 +30,25 @@ const run = async () => {
         app.get('/services', async (req, res) => {
             const query = {};
             const cursor = servicesCollections.find(query).limit(3);
+            // const cursor = Math.random(servicesCollections.find(query).limit(3));
             const services = await cursor.toArray()
 
             res.send(services);
         })
-        // get all services data.................................
+        // get add set all services data.................................
         app.get('/allservices', async (req, res) => {
             const query = {}
             const cursor = servicesCollections.find(query);
             const allServices = await cursor.toArray();
 
             res.send(allServices);
+        })
+
+        app.post('/services', async (req, res) => {
+            const service = req.body;
+
+            const result = await servicesCollections.insertOne(service)
+            res.send(result)
         })
 
         // get specific service using filtering with id.........................
@@ -79,21 +83,6 @@ app.get('/', (req, res) => {
     res.send('Server is working!')
 })
 
-
-// app.get('/services', (req, res) => {
-//     const limitService = services.slice(0, 3);
-//     res.send(limitService)
-// })
-
-// app.get('/allservices', (req, res) => {
-//     res.send(services);
-// })
-
-// app.get('/service/:id', (req, res) => {
-//     const id = req.params.id;
-//     const service = services.find(ser => ser.id === id)
-//     res.send(service)
-// })
 
 app.listen(port, () => {
     console.log(`server is runnign on port: ${port}`);
