@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const jwt = require('jsonwebtoken')
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const { query, application } = require('express');
 require('dotenv').config();
@@ -19,6 +20,23 @@ app.use(express.json());
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.geiv5ao.mongodb.net/?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
+
+const verifyJWT = (req, res, next) => {
+    const authHeader = req.headers.authorization;
+    if (!authHeader) {
+        return res.status(401).send('UnAuthorized Access');
+    }
+    const token = authHeader.split(' ')[1];
+
+    jwt.verify(token, process.env.ACCESS_SECRET_TOKEN, function (error, decoded) {
+        if (error) {
+            return res.status(401).send('UnAuthorized Access');
+        }
+        req.decoded = decoded;
+        next();
+    })
+}
+
 const run = async () => {
     try {
 
@@ -26,6 +44,13 @@ const run = async () => {
         const servicesCollections = client.db('CreativePhotograph').collection('services');
         const reviewsCollections = client.db('CreativePhotograph').collection('reviews');
 
+
+
+        app.post('/jwt', (req, res) => {
+            const user = req.body;
+            const token = jwt.sign(user, process.env.ACCESS_SECRET_TOKEN, { expiresIn: '1h' });
+            res.send({ token })
+        })
 
         // get limit of services data ...........................
         app.get('/services', async (req, res) => {
@@ -88,7 +113,13 @@ const run = async () => {
         })
 
         // get specific reviews of every user......................
-        app.get('/reviews', async (req, res) => {
+        app.get('/reviews', verifyJWT, async (req, res) => {
+            const decoded = req.decoded;
+
+            if (decoded.email !== req.query.email) {
+                res.status(403).send({ message: 'UnAuthorized Access' })
+            }
+
             const email = req.query.email;
             const query = {
                 email: email
