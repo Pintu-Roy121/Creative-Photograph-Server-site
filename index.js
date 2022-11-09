@@ -55,7 +55,7 @@ const run = async () => {
         // get limit of services data ...........................
         app.get('/services', async (req, res) => {
             const query = {};
-            const cursor = servicesCollections.find(query).limit(3);
+            const cursor = servicesCollections.find(query).limit(3).sort({ time: -1 });
             const services = await cursor.toArray()
 
             res.send(services);
