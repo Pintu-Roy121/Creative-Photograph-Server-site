@@ -48,7 +48,7 @@ const run = async () => {
 
         app.post('/jwt', (req, res) => {
             const user = req.body;
-            const token = jwt.sign(user, process.env.ACCESS_SECRET_TOKEN, { expiresIn: '1h' });
+            const token = jwt.sign(user, process.env.ACCESS_SECRET_TOKEN, { expiresIn: '1d' });
             res.send({ token })
         })
 
@@ -92,6 +92,8 @@ const run = async () => {
             res.send(result)
         })
 
+
+        // get specific service reviews...............................
         app.get('/reviews/:id', async (req, res) => {
             const id = req.params.id;
             const query = {
@@ -102,6 +104,7 @@ const run = async () => {
             res.send(result)
         })
 
+        // get specific review for edit...........................
         app.get('/review/:id', async (req, res) => {
             const id = req.params.id;
             const query = {
@@ -124,7 +127,7 @@ const run = async () => {
             const query = {
                 email: email
             }
-            const cursor = reviewsCollections.find(query);
+            const cursor = reviewsCollections.find(query).sort({ time: -1 });
             const result = await cursor.toArray();
             res.send(result);
         })
