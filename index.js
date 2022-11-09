@@ -115,7 +115,7 @@ const run = async () => {
 
         })
 
-        // get specific reviews of every user......................
+        // get specific sorted reviews of every user......................
         app.get('/reviews', verifyJWT, async (req, res) => {
             const decoded = req.decoded;
 
@@ -144,7 +144,6 @@ const run = async () => {
         app.patch('/review/:id', async (req, res) => {
             const id = req.params.id;
             const review = req.body;
-            console.log(review.image, review.rating);
 
             const filter = {
                 _id: ObjectId(id),
