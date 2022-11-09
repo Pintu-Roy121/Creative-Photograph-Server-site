@@ -45,7 +45,7 @@ const run = async () => {
         const reviewsCollections = client.db('CreativePhotograph').collection('reviews');
 
 
-
+        // Creater JWT secret token..............
         app.post('/jwt', (req, res) => {
             const user = req.body;
             const token = jwt.sign(user, process.env.ACCESS_SECRET_TOKEN, { expiresIn: '1d' });
