@@ -31,7 +31,6 @@ const run = async () => {
         app.get('/services', async (req, res) => {
             const query = {};
             const cursor = servicesCollections.find(query).limit(3);
-            // const cursor = Math.random(servicesCollections.find(query).limit(3));
             const services = await cursor.toArray()
 
             res.send(services);
@@ -62,14 +61,6 @@ const run = async () => {
             res.send(service);
         })
 
-        // get and post all reviews .............................
-        // app.get('/reviews', async (req, res) => {
-        //     const query = {};
-        //     const cursor = reviewsCollections.find(query);
-        //     const result = await cursor.toArray();
-        //     res.send(result)
-        // })
-
         app.post('/reviews', async (req, res) => {
             const review = req.body;
             const result = await reviewsCollections.insertOne(review);
@@ -95,6 +86,17 @@ const run = async () => {
             const cursor = reviewsCollections.find(query);
             const result = await cursor.toArray();
             res.send(result);
+        })
+
+        app.delete('/reviews/:id', async (req, res) => {
+            const { id } = req.params;
+            const query = {
+                _id: ObjectId(id)
+            }
+
+            const result = await reviewsCollections.deleteOne(query);
+            console.log(result);
+            res.send(result)
         })
 
 
