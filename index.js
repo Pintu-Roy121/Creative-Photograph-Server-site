@@ -63,7 +63,7 @@ const run = async () => {
         // get add set all services data.................................
         app.get('/allservices', async (req, res) => {
             const query = {}
-            const cursor = servicesCollections.find(query);
+            const cursor = servicesCollections.find(query).sort({ time: -1 });
             const allServices = await cursor.toArray();
 
             res.send(allServices);
