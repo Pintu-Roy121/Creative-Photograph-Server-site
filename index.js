@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
-const { query } = require('express');
+const { query, application } = require('express');
 require('dotenv').config();
 
 
@@ -77,6 +77,16 @@ const run = async () => {
             res.send(result)
         })
 
+        app.get('/review/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = {
+                _id: ObjectId(id),
+            }
+            const result = await reviewsCollections.findOne(query);
+            res.send(result)
+
+        })
+
         // get specific reviews of every user......................
         app.get('/reviews', async (req, res) => {
             const email = req.query.email;
@@ -93,11 +103,32 @@ const run = async () => {
             const query = {
                 _id: ObjectId(id)
             }
-
             const result = await reviewsCollections.deleteOne(query);
-            console.log(result);
             res.send(result)
         })
+
+        app.patch('/review/:id', async (req, res) => {
+            const id = req.params.id;
+            const review = req.body;
+            console.log(review.image, review.rating);
+
+            const filter = {
+                _id: ObjectId(id),
+            }
+
+            const updateReview = {
+                $set: {
+                    image: review.image,
+                    rating: review.rating,
+                    description: review.description
+                }
+            }
+            const result = await reviewsCollections.updateOne(filter, updateReview);
+            res.send(result)
+
+        })
+
+
 
 
     }
