@@ -170,8 +170,7 @@ const run = async () => {
     }
 
 }
-run().catch(error => console.log(error.message)
-)
+run().catch(error => console.log(error.message))
 
 
 
